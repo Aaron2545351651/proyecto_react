@@ -36,6 +36,9 @@ function App() {
       <br/>
       <h2 style={color}>Autores Destacados</h2><br/>
       <ListAutores />
+      <br/>
+      <br/>
+      <h5 style={color}>Facebook: BibliotecaElParaiso</h5><br/>
     </div>
   );
 }
