@@ -2,9 +2,13 @@ import Saludo from './components/Saludo';
 import Carrusel from './components/Carrusel';
 import ListLibros from './components/ListLibros';
 import ListAutores from './components/ListAutores';
+import dataLibro from './data/Libro';
+import { useState } from 'react';
+import ListFavoritos from './components/ListFavoritos';
 
 
 function App() {
+
   const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -20,6 +24,25 @@ function App() {
     fontWeight: 'bold',
   };
 
+  function addLibroToFavorites(element) {
+    // Verificar si el producto ya está en el carrito
+    if (!listLibrosFavoritos.some(item => item.Id === element.Id)) {
+      setListLibrosFavoritos([...listLibrosFavoritos, element]);
+    } else {
+      // Producto ya en el carrito, mostrar un mensaje o realizar alguna acción
+      console.log('El libro ya está en Favoritos.');
+    }
+  }
+
+  // Función para eliminar un elemento del carrito
+  function eliminarDeFavorito(libroId) {
+    const nuevoFavorito = listLibrosFavoritos.filter(element => element.Id !== libroId);
+    setListLibrosFavoritos(nuevoFavorito);
+  }
+
+  const [listLibros, setListLibros] = useState(dataLibro);
+  const [listLibrosFavoritos, setListLibrosFavoritos] = useState([])
+
   return (
     <div style={containerStyle}>
       <h1 style={color}>BIBLIOTECA "EL PARAISO DE LOS LIBROS"</h1>
@@ -30,8 +53,21 @@ function App() {
       <Carrusel />
       <br/>
       <br/>
-      <h2 style={color}>Libros Destacados</h2><br/>
-      <ListLibros />
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-9'>
+            <h2 style={color}>Libros Destacados</h2><br/>
+            <ListLibros 
+              elements={listLibros}
+              fnAddFavorites={addLibroToFavorites}/>
+          </div>
+          <div className='col-md-3'>
+            <ListFavoritos 
+              elements={listLibrosFavoritos} 
+              eliminarDeFavorito={eliminarDeFavorito}/>
+          </div>
+        </div>
+      </div>
       <br/>
       <br/>
       <h2 style={color}>Autores Destacados</h2><br/>

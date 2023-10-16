@@ -1,20 +1,19 @@
-import dataLibro from '../data/Libro';
 import Libro from './Libro';
 
-function ListLibros() {
+function ListLibros(props) {
         
-    let lstLibros = dataLibro.map(element =>{
+    let listLibrosRendered = props.elements.map(element =>{
         return <Libro
-                    titulo={element.Titulo}
-                    descripcion={element.Descripcion}
-                    imagen={element.Images}
+                    key={element.Id}
+                    value = {element}
+                    fnAddFavorites={props.fnAddFavorites}
                 />
     });
 
     return(
-        <div className="col-md-6">
+        <div className="col-md-9">
         <div className='row ml-auto'>
-            {lstLibros}
+            {listLibrosRendered}
         </div>
         </div>
     );
