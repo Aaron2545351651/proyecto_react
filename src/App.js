@@ -5,6 +5,7 @@ import ListAutores from './components/ListAutores';
 import dataLibro from './data/Libro';
 import { useState } from 'react';
 import ListFavoritos from './components/ListFavoritos';
+import CrearLibro from './components/CrearLibro';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '100vh',
-    background: `url('./images/OIP.jpg') no-repeat `, // Reemplaza 'URL_DE_LA_IMAGEN_EN_LINEA' con la URL de la imagen en línea
+    background: `url('./images/OIP.jpg') no-repeat `,
     backgroundSize: 'cover', // Ajusta el tamaño de la imagen al contenedor
   };
   const color = {
@@ -32,6 +33,10 @@ function App() {
       // Producto ya en el carrito, mostrar un mensaje o realizar alguna acción
       console.log('El libro ya está en Favoritos.');
     }
+  }
+
+  function nuevoLibro(element) {
+    setListLibros([...listLibros, element]);
   }
 
   // Función para eliminar un elemento del carrito
@@ -62,9 +67,12 @@ function App() {
               fnAddFavorites={addLibroToFavorites}/>
           </div>
           <div className='col-md-3'>
+          <h2 style={color}>Agregar nuevo libro</h2>
+            <CrearLibro fnNuevoLibro={nuevoLibro}/><br/>
             <ListFavoritos 
               elements={listLibrosFavoritos} 
-              eliminarDeFavorito={eliminarDeFavorito}/>
+              eliminarDeFavorito={eliminarDeFavorito}
+              />
           </div>
         </div>
       </div>

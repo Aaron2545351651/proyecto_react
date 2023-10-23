@@ -1,6 +1,6 @@
 function Saludo(){
     const estiloFondo = {
-        backgroundColor: 'rgba(240, 240, 240, 0.5) ', // Cambia este color al que desees
+        backgroundColor: 'rgba(240, 240, 240, 0.5) ',
     };
 
     return(
